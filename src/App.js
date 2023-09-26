@@ -1,9 +1,12 @@
 import './App.css';
+import React from 'react';
 
 function Calculator() {
 
+  const [display, setDisplay] = React.useState(0);
+
   function handleNumber(value){
-    alert('handleNumber click' + value);
+    setDisplay(value)
   }
 
   function handleOperator(value){
@@ -12,7 +15,7 @@ function Calculator() {
 
   return (
       <div className='calculator'>
-        <div className='display'>0</div>
+        <div className="display">{display}</div>
           <CalcButton value="7" onClick={handleNumber}/>
           <CalcButton value="8" onClick={handleNumber}/>
           <CalcButton value="9" onClick={handleNumber}/>
