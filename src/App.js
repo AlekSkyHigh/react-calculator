@@ -2,12 +2,12 @@ import './App.css';
 
 function Calculator() {
 
-  function handleNumber(){
-    alert('handleNumber click');
+  function handleNumber(value){
+    alert('handleNumber click' + value);
   }
 
-  function handleOperator(){
-    alert('handleOperator click');
+  function handleOperator(value){
+    alert('handleOperator click' + value);
   }
 
   return (
@@ -37,7 +37,7 @@ function Calculator() {
 }
 
 function CalcButton(props){
-  return <button className={props.className} onClick={props.onClick}>{props.value}</button>
+  return <button className={props.className} onClick={() => props.onClick(props.value)}>{props.value}</button>
 }
 
 export default Calculator;
