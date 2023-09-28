@@ -17,7 +17,7 @@ function Calculator() {
       newValue = calc.current + value;
     }
 
-    setCalc({ current: newValue, total: calc.total, isInitial: false });
+    setCalc({ current: newValue, total: calc.total, isInitial: false, preOp: calc.preOp });
   }
 
   // * Updating the state:
@@ -27,7 +27,6 @@ function Calculator() {
     setCalc({ current: total.toString(), total: total.toString(), isInitial: true, preOp: value });
   }
 
-  // * Handling calculation:
   function doCalculation() {
     let total = parseInt(calc.total);
 
@@ -55,12 +54,6 @@ function Calculator() {
     });
   }
 
-  function handleEquals() {
-    let total = doCalculation();
-
-    setCalc({ current: total.toString(), total: total.toString(), isInitial: true, preOp: "=" });
-  }
-
   return (
     <div className='calculator'>
       <div className="display">{renderDisplay()}</div>
@@ -81,7 +74,7 @@ function Calculator() {
 
       <CalcButton value="C" onClick={handleClear} />
       <CalcButton value="0" onClick={handleNumber} />
-      <CalcButton value="=" onClick={handleEquals} />
+      <CalcButton value="=" onClick={handleOperator} />
       <CalcButton className="operator" value="+" onClick={handleOperator} />
     </div>
   )
