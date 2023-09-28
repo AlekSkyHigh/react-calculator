@@ -7,6 +7,7 @@ function Calculator() {
     current: "0",
     total: "0",
     isInitial: true,
+    preOp: "",
   });
 
   function handleNumber(value) {
@@ -19,12 +20,45 @@ function Calculator() {
     setCalc({ current: newValue, total: calc.total, isInitial: false });
   }
 
+  // * Updating the state:
   function handleOperator(value) {
+    const total = doCalculation();
 
+    setCalc({ current: total.toString(), total: total.toString(), isInitial: true, preOp: value });
+  }
+
+  // * Handling calculation:
+  function doCalculation() {
+    let total = parseInt(calc.total);
+
+    switch (calc.preOp) {
+      case "+": total += parseInt(calc.current); break;
+      case "-": total -= parseInt(calc.current); break;
+      case "*": total *= parseInt(calc.current); break;
+      case "/": total /= parseInt(calc.current); break;
+      default: total = parseInt(calc.current)
+    }
+
+    return total;
   }
 
   function renderDisplay() {
     return calc.current;
+  }
+
+  function handleClear() {
+    setCalc({
+      current: "0",
+      total: "0",
+      isInitial: true,
+      preOp: "",
+    });
+  }
+
+  function handleEquals() {
+    let total = doCalculation();
+
+    setCalc({ current: total.toString(), total: total.toString(), isInitial: true, preOp: "=" });
   }
 
   return (
@@ -45,9 +79,9 @@ function Calculator() {
       <CalcButton value="3" onClick={handleNumber} />
       <CalcButton className="operator" value="-" onClick={handleOperator} />
 
-      <CalcButton value="C" />
+      <CalcButton value="C" onClick={handleClear} />
       <CalcButton value="0" onClick={handleNumber} />
-      <CalcButton value="=" />
+      <CalcButton value="=" onClick={handleEquals} />
       <CalcButton className="operator" value="+" onClick={handleOperator} />
     </div>
   )
