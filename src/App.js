@@ -8,6 +8,7 @@ function Calculator() {
     total: "0",
     isInitial: true,
     preOp: "",
+    errorMessage: "",
   });
 
   function handleNumber(value) {
@@ -17,7 +18,18 @@ function Calculator() {
       newValue = calc.current + value;
     }
 
-    setCalc({ current: newValue, total: calc.total, isInitial: false, preOp: calc.preOp });
+    if (newValue.length > 23) {
+      setCalc({
+        current: calc.current,
+        total: calc.total,
+        isInitial: false,
+        preOp: calc.preOp,
+        errorMessage: "Input too long (max 23 characters)",
+      });
+      return; // Exit the function to prevent setting the state with a long value
+    }
+
+    setCalc({ current: newValue, total: calc.total, isInitial: false, preOp: calc.preOp, errorMessage: "" });
   }
 
   // * Updating the state:
@@ -42,7 +54,23 @@ function Calculator() {
   }
 
   function renderDisplay() {
-    return calc.current;
+    const numLength = calc.current.length;
+
+    const scalingLevels = [
+      { threshold: 11, fontSize: '1.1em' },
+      { threshold: 15, fontSize: '0.9em' },
+      { threshold: 23, fontSize: '0.6em' },
+    ];
+
+    const matchedLevel = scalingLevels.find(level => numLength <= level.threshold);
+
+    const fontSize = matchedLevel ? matchedLevel.fontSize : '30px';
+
+    return (
+      <div style={{ fontSize }}>
+        {calc.errorMessage ? calc.errorMessage : calc.current}
+      </div>
+    );
   }
 
   function handleClear() {
@@ -80,6 +108,7 @@ function Calculator() {
   )
 }
 
+// * This is a reusable component for rendering calculator buttons.
 function CalcButton(props) {
   return <button className={props.className} onClick={() => props.onClick(props.value)}>{props.value}</button>
 }
