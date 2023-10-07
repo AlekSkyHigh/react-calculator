@@ -18,13 +18,13 @@ function Calculator() {
       newValue = calc.current + value;
     }
 
-    if (newValue.length > 23) {
+    if (newValue.length > 17) {
       setCalc({
         current: calc.current,
         total: calc.total,
         isInitial: false,
         preOp: calc.preOp,
-        errorMessage: "Input too long (max 23 characters)",
+        errorMessage: "Input too long (max 17 characters)",
       });
       return; // Exit the function to prevent setting the state with a long value
     }
@@ -57,9 +57,9 @@ function Calculator() {
     const numLength = calc.current.length;
 
     const scalingLevels = [
-      { threshold: 11, fontSize: '1.1em' },
-      { threshold: 15, fontSize: '0.9em' },
-      { threshold: 23, fontSize: '0.6em' },
+      { threshold: 9, fontSize: '1.1em' },
+      { threshold: 12, fontSize: '0.9em' },
+      { threshold: 17, fontSize: '0.6em' },
     ];
 
     const matchedLevel = scalingLevels.find(level => numLength <= level.threshold);
@@ -83,28 +83,31 @@ function Calculator() {
   }
 
   return (
-    <div className='calculator'>
-      <div className="display">{renderDisplay()}</div>
-      <CalcButton value="7" onClick={handleNumber} />
-      <CalcButton value="8" onClick={handleNumber} />
-      <CalcButton value="9" onClick={handleNumber} />
-      <CalcButton className="operator" value="/" onClick={handleOperator} />
+    <div className='container'>
+      <div className='calculator'>
+        <div className="display">{renderDisplay()}</div>
+        <CalcButton value="7" onClick={handleNumber} />
+        <CalcButton value="8" onClick={handleNumber} />
+        <CalcButton value="9" onClick={handleNumber} />
+        <CalcButton className="operator" value="/" onClick={handleOperator} />
 
-      <CalcButton value="4" onClick={handleNumber} />
-      <CalcButton value="5" onClick={handleNumber} />
-      <CalcButton value="6" onClick={handleNumber} />
-      <CalcButton className="operator" value="*" onClick={handleOperator} />
+        <CalcButton value="4" onClick={handleNumber} />
+        <CalcButton value="5" onClick={handleNumber} />
+        <CalcButton value="6" onClick={handleNumber} />
+        <CalcButton className="operator" value="*" onClick={handleOperator} />
 
-      <CalcButton value="1" onClick={handleNumber} />
-      <CalcButton value="2" onClick={handleNumber} />
-      <CalcButton value="3" onClick={handleNumber} />
-      <CalcButton className="operator" value="-" onClick={handleOperator} />
+        <CalcButton value="1" onClick={handleNumber} />
+        <CalcButton value="2" onClick={handleNumber} />
+        <CalcButton value="3" onClick={handleNumber} />
+        <CalcButton className="operator" value="-" onClick={handleOperator} />
 
-      <CalcButton value="C" onClick={handleClear} />
-      <CalcButton value="0" onClick={handleNumber} />
-      <CalcButton value="=" onClick={handleOperator} />
-      <CalcButton className="operator" value="+" onClick={handleOperator} />
-    </div>
+        <CalcButton value="C" onClick={handleClear} />
+        <CalcButton value="0" onClick={handleNumber} />
+        <CalcButton value="=" onClick={handleOperator} />
+        <CalcButton className="operator" value="+" onClick={handleOperator} />
+      </div>
+    </div >
+
   )
 }
 

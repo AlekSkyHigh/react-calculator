@@ -3,28 +3,40 @@
   height: 400px;
 }
 
+.container {
+  width: 200px;
+}
+
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 50px);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid black;
 }
 
 .display {
   grid-column-start: 1;
   grid-column-end: 5;
-  height: 40px;
+  height: 50px;
   font-size: 30px;
   text-align: right;
-  border: 1px solid black;
   padding-right: 10px;
   padding-top: 5px;
+  background-color: rgb(40, 30, 60);
+  color: white;
 }
 
 button {
   height: 50px;
-  background-color: white;
-  border: 1px solid lightgray;
+  background-color: rgb(92, 89, 106	);
+  border: 0.5px solid black;
+  color: white;
+  font-size: large;
 }
 
 button.operator {
-  background-color: lightgray;
+  background-color: rgb(242, 164, 60);
+  border: 0.5px solid black;
+  color: white;
 }
