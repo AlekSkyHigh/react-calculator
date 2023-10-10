@@ -39,4 +39,5 @@ button.operator {
   background-color: rgb(242, 164, 60);
   border: 0.5px solid black;
   color: white;
+  font-size: large;
 }
